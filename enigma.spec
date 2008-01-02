@@ -7,6 +7,7 @@ License: GPL
 Group: Games/Boards
 URL: http://www.chiark.greenend.org.uk/~sgtatham/enigma/
 BuildRequires: ncurses-devel
+BuildRoot: %{_tmppath}/%{name}-%{version}-buildroot
 
 %description
 Enigma is a puzzle game with elements of Boulderdash and elements 
