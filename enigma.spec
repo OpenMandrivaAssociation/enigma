@@ -29,19 +29,7 @@ mkdir -p $RPM_BUILD_ROOT%_bindir
 
 %makeinstall
 
-mkdir -p $RPM_BUILD_ROOT%{_menudir}
 
-cat << EOF > $RPM_BUILD_ROOT%{_menudir}/%{name}
-?package(%{name}): \
-	command="%{_bindir}/%{name}" \
-	needs="x11" \
-	section="Amusement/Boards" \
-	title="Enigma" \
-	icon="boards_section.png" \
-	longtitle="Enigma is a puzzle game" \
-	startup_notify="false" \
-        xdg="true"
-EOF
 
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
@@ -70,6 +58,5 @@ rm -rf $RPM_BUILD_ROOT
 %doc README 
 %{_bindir}/*
 %{_datadir}/enigma
-%{_menudir}/*
 %{_datadir}/applications/mandriva-%{name}.desktop
 
