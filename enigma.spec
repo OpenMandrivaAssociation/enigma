@@ -1,4 +1,4 @@
-Summary: Enigma is a puzzle game
+Summary: Puzzle game
 Name: enigma
 Version: 1.03
 Release: %mkrel 5
