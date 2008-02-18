@@ -1,7 +1,7 @@
 Summary: Puzzle game
 Name: enigma
 Version: 1.03
-Release: %mkrel 5
+Release: %mkrel 6
 Source0: %{name}-%{version}.tar.bz2
 License: GPL
 Group: Games/Boards
