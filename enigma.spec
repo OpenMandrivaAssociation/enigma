@@ -1,9 +1,9 @@
 Summary: Puzzle game
 Name: enigma
 Version: 1.03
-Release: %mkrel 8
+Release: %mkrel 9
 Source0: %{name}-%{version}.tar.bz2
-License: GPL
+License: MIT
 Group: Games/Boards
 URL: http://www.chiark.greenend.org.uk/~sgtatham/enigma/
 BuildRequires: ncurses-devel
@@ -38,10 +38,10 @@ Name=Enigma
 Comment=Enigma is a puzzle game
 Exec=%{_bindir}/%{name} 
 Icon=boards_section
-Terminal=false
+Terminal=true
 Type=Application
 StartupNotify=false
-Categories=X-MandrivaLinux-MoreApplications-Games-Boards;Game;BoardGame;
+Categories=Game;BoardGame;
 EOF
 
 %clean
@@ -50,9 +50,6 @@ rm -rf $RPM_BUILD_ROOT
 %if %mdkversion < 200900
 %post
 %{update_menus}
-%endif
-
-%if %mdkversion < 200900
 %postun
 %{clean_menus}
 %endif
