@@ -1,10 +1,10 @@
 Summary: Puzzle game
 Name: enigma
 Version: 1.03
-Release: %mkrel 9
+Release: %mkrel 10
 Source0: %{name}-%{version}.tar.bz2
 License: MIT
-Group: Games/Boards
+Group: Games/Puzzles
 URL: http://www.chiark.greenend.org.uk/~sgtatham/enigma/
 BuildRequires: ncurses-devel
 BuildRoot: %{_tmppath}/%{name}-%{version}-buildroot
@@ -17,19 +17,13 @@ of Sokoban, but is possibly most similar to the old Spectrum game XOR.
 %setup -q
 
 %build
-
-%configure
-
+%configure2_5x
 %make
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-mkdir -p $RPM_BUILD_ROOT%_bindir
-
-%makeinstall
-
-
+%makeinstall_std
 
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
@@ -37,11 +31,11 @@ cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 Name=Enigma
 Comment=Enigma is a puzzle game
 Exec=%{_bindir}/%{name} 
-Icon=boards_section
+Icon=puzzle_section
 Terminal=true
 Type=Application
 StartupNotify=false
-Categories=Game;BoardGame;
+Categories=Game;LogicGame;
 EOF
 
 %clean
@@ -60,4 +54,3 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/*
 %{_datadir}/enigma
 %{_datadir}/applications/mandriva-%{name}.desktop
-
