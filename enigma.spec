@@ -3,6 +3,7 @@ Name: enigma
 Version: 1.03
 Release: %mkrel 10
 Source0: %{name}-%{version}.tar.bz2
+Patch0: enigma-1.03-fix-install.patch
 License: MIT
 Group: Games/Puzzles
 URL: http://www.chiark.greenend.org.uk/~sgtatham/enigma/
@@ -15,6 +16,7 @@ of Sokoban, but is possibly most similar to the old Spectrum game XOR.
 
 %prep
 %setup -q
+%patch0 -p0
 
 %build
 %configure2_5x
@@ -22,8 +24,7 @@ of Sokoban, but is possibly most similar to the old Spectrum game XOR.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
-%makeinstall_std
+%makeinstall
 
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
