@@ -1,7 +1,7 @@
 Summary: Puzzle game
 Name: enigma
 Version: 1.03
-Release: %mkrel 10
+Release: %mkrel 11
 Source0: %{name}-%{version}.tar.bz2
 Patch0: enigma-1.03-fix-install.patch
 License: MIT
