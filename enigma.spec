@@ -1,8 +1,8 @@
 Summary: Puzzle game
 Name: enigma
-Version: 1.03
-Release: %mkrel 12
-Source0: %{name}-%{version}.tar.bz2
+Version: 1.04
+Release: 1
+Source0: http://www.chiark.greenend.org.uk/~sgtatham/enigma/%{name}-%{version}.tar.gz
 Patch0: enigma-1.03-fix-install.patch
 License: MIT
 Group: Games/Puzzles
@@ -23,11 +23,10 @@ of Sokoban, but is possibly most similar to the old Spectrum game XOR.
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT
 %makeinstall
 
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
-cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
+mkdir -p %{buildroot}%{_datadir}/applications
+cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
 Name=Enigma
 Comment=Enigma is a puzzle game
@@ -38,16 +37,6 @@ Type=Application
 StartupNotify=false
 Categories=Game;LogicGame;
 EOF
-
-%clean
-rm -rf $RPM_BUILD_ROOT
-
-%if %mdkversion < 200900
-%post
-%{update_menus}
-%postun
-%{clean_menus}
-%endif
 
 %files
 %defattr(-,root,root)
@@ -98,7 +87,7 @@ rm -rf $RPM_BUILD_ROOT
     - import enigma
 
 
-* Mon Sep 18 2006 Nicolas Lécureuil <neoclust@mandriva.org> 1.03-5mdv2007.0
+* Mon Sep 18 2006 Nicolas LÃ©cureuil <neoclust@mandriva.org> 1.03-5mdv2007.0
 - XDG
 
 * Tue Jan 10 2006 Frederic Crozat <fcrozat@mandriva.com> 1.03-4mdk
@@ -113,4 +102,5 @@ rm -rf $RPM_BUILD_ROOT
 
 * Mon Mar 24 2003 Lenny Cartier <lenny@mandrakesoft.com> 1.03-1mdk
 - 1.03
+
 
