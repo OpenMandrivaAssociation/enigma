@@ -1,14 +1,13 @@
 Summary: Puzzle game
 Name: enigma
-Version: 1.04
+Version: 1.20
 Release: 1
-Source0: http://www.chiark.greenend.org.uk/~sgtatham/enigma/%{name}-%{version}.tar.gz
+Source0: http://downloads.sourceforge.net/enigma-game/Release%201.20/%{name}-%{version}.tar.gz
 Patch0: enigma-1.03-fix-install.patch
 License: MIT
 Group: Games/Puzzles
 URL: http://www.chiark.greenend.org.uk/~sgtatham/enigma/
 BuildRequires: ncurses-devel
-BuildRoot: %{_tmppath}/%{name}-%{version}-buildroot
 
 %description
 Enigma is a puzzle game with elements of Boulderdash and elements 
@@ -39,7 +38,6 @@ Categories=Game;LogicGame;
 EOF
 
 %files
-%defattr(-,root,root)
 %doc README 
 %{_bindir}/*
 %{_datadir}/enigma
@@ -102,5 +100,6 @@ EOF
 
 * Mon Mar 24 2003 Lenny Cartier <lenny@mandrakesoft.com> 1.03-1mdk
 - 1.03
+
 
 
