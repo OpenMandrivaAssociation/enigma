@@ -1,7 +1,7 @@
 Summary:	Puzzle game similar to Oxyd
 Name:		enigma
 Version:	1.20
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		Games/Arcade
 Url:		http://www.nongnu.org/enigma/
