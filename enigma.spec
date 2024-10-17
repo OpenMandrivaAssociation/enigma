@@ -4,7 +4,7 @@ Version:	1.20
 Release:	2
 License:	GPLv2+
 Group:		Games/Arcade
-Url:		http://www.nongnu.org/enigma/
+Url:		https://www.nongnu.org/enigma/
 Source0:	http://downloads.sourceforge.net/%{name}-game/Release%20%{version}/%{name}-%{version}.tar.gz
 BuildRequires:	desktop-file-utils
 BuildRequires:	imagemagick
