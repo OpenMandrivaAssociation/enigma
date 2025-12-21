@@ -6,6 +6,11 @@ License:	GPLv2+
 Group:		Games/Arcade
 Url:		https://www.nongnu.org/enigma/
 Source0:	http://downloads.sourceforge.net/%{name}-game/Release%20%{version}/%{name}-%{version}.tar.gz
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	desktop-file-utils
 BuildRequires:	imagemagick
 BuildRequires:	pkgconfig(libcurl)
