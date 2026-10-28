@@ -1,26 +1,29 @@
 Summary:	Puzzle game similar to Oxyd
 Name:		enigma
-Version:	1.20
-Release:	2
-License:	GPLv2+
+Version:	1.30
+Release:	1
+License:	GPL-2.0-or-later
 Group:		Games/Arcade
-Url:		https://www.nongnu.org/enigma/
-Source0:	http://downloads.sourceforge.net/%{name}-game/Release%20%{version}/%{name}-%{version}.tar.gz
-BuildRequires:	autoconf
-BuildRequires:	automake
-BuildRequires:	libtool-base
-BuildRequires:	slibtool
-BuildRequires:	make
+URL:		https://www.nongnu.org/enigma/
+Source0:	https://github.com/Enigma-Game/Enigma/releases/download/%{version}/Enigma-%{version}-src.tar.gz
+Patch0:		enigma-1.30-format-security.patch
+# Current autoconf adds -std=gnu23 to CC. Bundled Lua is compiled with
+# "cc -x c++", and clang rejects -std=gnu23 together with -x c++.
+%global		_disable_rebuild_configure 1
+BuildSystem:	autotools
+BuildOption:	--with-system-enet
 BuildRequires:	desktop-file-utils
+BuildRequires:	gettext
 BuildRequires:	imagemagick
+BuildRequires:	pkgconfig(SDL2_image)
+BuildRequires:	pkgconfig(SDL2_mixer)
+BuildRequires:	pkgconfig(SDL2_ttf)
 BuildRequires:	pkgconfig(libcurl)
+BuildRequires:	pkgconfig(libenet)
 BuildRequires:	pkgconfig(libpng)
-BuildRequires:	pkgconfig(lua)
-BuildRequires:	pkgconfig(sdl)
-BuildRequires:	pkgconfig(SDL_image)
-BuildRequires:	pkgconfig(SDL_mixer)
-BuildRequires:	pkgconfig(SDL_ttf)
+BuildRequires:	pkgconfig(sdl2)
 BuildRequires:	pkgconfig(xerces-c)
+BuildRequires:	pkgconfig(zlib)
 
 %description
 Enigma is a tribute to and a re-implementation of one of the most
@@ -30,35 +33,23 @@ Oxyd stones in each landscape.  Sounds simple?  It would be, if it
 weren't for hidden traps, vast mazes, insurmountable obstacles and
 innumerable puzzles blocking your direct way to the Oxyd stones...
 
-%files -f %{name}.lang
-%{_bindir}/*
-%{_datadir}/enigma
-%{_datadir}/applications/%{name}.desktop
+%install -a
+desktop-file-install \
+	--remove-key=Version \
+	--remove-category=Application \
+	--remove-category=PuzzleGame \
+	--add-category=ArcadeGame \
+	--add-category=LogicGame \
+	--dir %{buildroot}%{_datadir}/applications \
+	%{buildroot}%{_datadir}/applications/%{name}.desktop
+
+# Catalogs are .po files under %%{_datadir}/enigma, so %%find_lang has nothing to list.
+%files
+%{_bindir}/enigma
 %{_mandir}/man6/*
+%{_datadir}/applications/%{name}.desktop
+%{_datadir}/appdata/%{name}.appdata.xml
 %{_datadir}/icons/hicolor/48x48/apps/*
 %{_datadir}/pixmaps/*
-
-#----------------------------------------------------------------------------
-
-%prep
-%setup -q
-
-%build
-%configure2_5x
-%make
-
-%install
-%makeinstall_std
-
-rm -rf %{buildroot}/%{_docdir}/%{name}
-
-rm -rf %{buildroot}%{_includedir} %{buildroot}%{_libdir}/*.a
-
-desktop-file-install --vendor="" \
-  --remove-category="Application" \
-  --remove-category="PuzzleGame" \
-  --add-category="ArcadeGame;LogicGame" \
-  --dir %{buildroot}%{_datadir}/applications %{buildroot}%{_datadir}/applications/*
-
-%find_lang %{name}
-
+%{_datadir}/enigma
+%{_docdir}/enigma

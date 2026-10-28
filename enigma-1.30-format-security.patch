@@ -1,0 +1,84 @@
+--- a/src/main.cc
++++ b/src/main.cc
+@@ -352,7 +352,7 @@
+ 
+     // initialize preferences -- needs LUA, XML
+     if (!options::Load()) {
+-        fprintf(stderr, _("Error in configuration file.\n"));
++        fprintf(stderr, "%s", _("Error in configuration file.\n"));
+       	fprintf(stderr, "%s\n", lua::LastError (lua::GlobalState()).c_str());
+     }
+     prefs = PreferenceManager::instance();
+@@ -583,7 +583,7 @@
+         prefPath = ecl::ExpandPath(prefFilename);
+         if (!ecl::FolderExists(prefPath))
+             if(!ecl::FolderCreate(prefPath)) {
+-                fprintf(stderr, ("Error: Cannot create pref directory.\n"));
++                fprintf(stderr, "%s", _("Error: Cannot create pref directory.\n"));
+                 exit(1);
+             }
+         userStdPath = prefPath; // default if pref is a path
+@@ -593,7 +593,7 @@
+         if (!ecl::FolderExists(prefPath))
+             // may happen on Windows
+             if(!ecl::FolderCreate(prefPath)) {
+-                fprintf(stderr, _("Error: Home directory does not exist.\n"));
++                fprintf(stderr, "%s", _("Error: Home directory does not exist.\n"));
+                 exit(1);
+             }
+ #ifdef MACOSX
+@@ -608,7 +608,7 @@
+         if (!ecl::FolderExists(winAppDataPath))
+             // may happen on Windows
+             if(!ecl::FolderCreate(winAppDataPath)) {
+-                fprintf(stderr, _("Error: Application Data directory does not exist.\n"));
++                fprintf(stderr, "%s", _("Error: Application Data directory does not exist.\n"));
+                 exit(1);
+             }
+ //        Log << "winAppDataPath " << winAppDataPath << "\n";
+@@ -616,7 +616,7 @@
+         prefPath = winAppDataPath + ecl::PathSeparator + "." + prefFilename;
+ #endif
+     } else {
+-        fprintf(stderr, _("Error: Home directory does not exist.\n"));
++        fprintf(stderr, "%s", _("Error: Home directory does not exist.\n"));
+         exit(1);
+     }
+ }
+@@ -635,7 +635,7 @@
+                 makeNewTranscoderFor(XMLRecognizer::UTF_8, initResult,
+                 4096); // the block size is irrelevant for utf-8
+         if (initResult != XMLTransService::Ok) {
+-            fprintf(stderr, _("Error in XML initialization.\n"));
++            fprintf(stderr, "%s", _("Error in XML initialization.\n"));
+             exit(1);
+         }
+ 
+@@ -684,7 +684,7 @@
+ #endif
+     }
+     catch (...) {
+-        fprintf(stderr, _("Error in XML initialization.\n"));
++        fprintf(stderr, "%s", _("Error in XML initialization.\n"));
+         exit(1);
+     }
+ }
+--- a/src/lua.cc
++++ b/src/lua.cc
+@@ -3894,14 +3894,14 @@
+     if (!fs->findFile(fname, completefn))
+     {
+         fprintf(stderr, _("Cannot find '%s'.\n"), fname.c_str());
+-        fprintf(stderr, _("Your installation may be incomplete or invalid.\n"));
++        fprintf(stderr, "%s", _("Your installation may be incomplete or invalid.\n"));
+         exit (1);
+     }
+ 
+     lua::Error status = lua::DoAbsoluteFile(L, completefn);
+     if (status != lua::NO_LUAERROR) {
+         fprintf(stderr, _("There was an error loading '%s'.\n"), completefn.c_str());
+-        fprintf(stderr, _("Your installation may be incomplete or invalid.\n"));
++        fprintf(stderr, "%s", _("Your installation may be incomplete or invalid.\n"));
+         fprintf(stderr, _("Error: '%s'\n"), lua::LastError(L).c_str());
+         exit (1);
+     }
